@@ -1,5 +1,5 @@
 $(async () => {
-  let sheet = await gsheet('1hfjEs_Su32g6n-x_UoiUCx5Jic7rdjVF3c_bdfwPNBM', 1)
+  let sheet = await gsheet('1hfjEs_Su32g6n-x_UoiUCx5Jic7rdjVF3c_bdfwPNBM', 'Sheet1')
 
   let gridItem = $('.grid-item')
   let grid = $('.grid')
