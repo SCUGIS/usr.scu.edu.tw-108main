@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>東吳大學 USR</title>
+
+  <!-- Web Font -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <link href="./main.css" rel="stylesheet">
+</head>
+<body>
+  <div class="loading">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <!-- add extra container element for Masonry -->
+    <div id="grid" class="grid">
+      <div class="grid-sizer"></div>
+      <div class="grid-item">
+        <a class="grid-link" href="#">
+          <div class="grid-body">
+            <h5 class="grid-title"></h5>
+            <p class="grid-content"></p>
+          </div>
+          <img src="" class="grid-image">
+          <div class="grid-tag">
+            <span class="badge"></span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <footer class="footer mt-auto py-3">
+      <span class="footer-text text-muted">Copyright ©SCU USR.</span>
+    </footer>
+  </div>
+
+	<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+	<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script src="lib/kit.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
