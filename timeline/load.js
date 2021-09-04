@@ -1,92 +1,40 @@
 $(function () {
-  var embed = document.getElementById('timeline-embed')
+  const embed = document.getElementById('timeline-embed')
   embed.style.height = getComputedStyle(document.body).height - 56
 
-  $.get('https://spreadsheets.google.com/feeds/list/1wu4xec9k7F5-c6hY1IfWDW8OtBnYY24pkWQIfDDHzE8/1/public/full?alt=json', (data) => {
+  const list = [
+    '1wu4xec9k7F5-c6hY1IfWDW8OtBnYY24pkWQIfDDHzE8',
+  ]
 
-    console.log(data)
-
-    let fmtData = {
-      events: [],
-      eras: [],
-    }
-
-    let fmtEntry = (data) => {
-      return {
-        start_date: {
-          year: data.gsx$year.$t,
-          month: data.gsx$month.$t,
-          day: data.gsx$day.$t,
-          hour: data.gsx$time.$t.split(':')[0],
-          minute: data.gsx$time.$t.split(':')[1],
-          second: data.gsx$time.$t.split(':')[2],
-          daisplay_text: data.gsx$displaydate.$t,
-        },
-        end_date: {
-          year: data.gsx$endyear.$t,
-          month: data.gsx$endmonth.$t,
-          day: data.gsx$endday.$t,
-          hour: data.gsx$endtime.$t.split(':')[0],
-          minute: data.gsx$endtime.$t.split(':')[1],
-          second: data.gsx$endtime.$t.split(':')[2],
-        },
-        media: {
-          caption: data.gsx$mediacaption.$t,
-          credit: data.gsx$mediacredit.$t,
-          url: data.gsx$media.$t,
-          thumbnail: data.gsx$mediathumbnail.$t,
-        },
-        text: {
-          headline: data.gsx$headline.$t,
-          text: data.gsx$text.$t,
-        },
-        type: data.gsx$type.$t,
-        group: data.gsx$group.$t,
-        background: data.gsx$background.$t,
-      }
-    }
-
-    let makeTitle = (data) => {
-      return {
-        media: data.media,
-        text: data.text,
-      }
-    }
-
-    let makeEvent = (data) => {
-      return {
-        media: data.media,
-        text: data.text,
-        start_date: data.start_date,
-        end_date: data.end_date,
-      }
-    }
-
-
-    data.feed.entry.map(data => {
-      let fmt = fmtEntry(data)
-
-      if (fmt.type === 'title') {
-        fmtData.title = makeTitle(fmt)
-      } else if (fmt.type === 'era'){
-        fmtData.eras.push(makeEvent(fmt))
+  const load = (url) => {
+    function ready (fn) {
+      if (document.readyState != 'loading') {
+        fn()
       } else {
-        fmtData.events.push(makeEvent(fmt))
+        document.addEventListener('DOMContentLoaded', fn)
       }
-    })
+    }
 
-    let blob = new Blob([JSON.stringify(fmtData)], { type: 'application/json' })
-    let url = URL.createObjectURL(blob)
-    window.timeline = new TL.Timeline('timeline-embed', url, {
-      theme_color: '#288EC3',
-      hash_bookmark: false
-    })
+    ready(function () {
+      console.log(url)
+      window.timeline = new TL.Timeline('timeline-embed', url)
 
-    window.addEventListener('resize', function() {
-      var embed = document.getElementById('timeline-embed')
-      embed.style.height = getComputedStyle(document.body).height - 56
-      timeline.updateDisplay()
+      window.addEventListener('resize', function () {
+        const embed = document.getElementById('timeline-embed')
+        embed.style.height = getComputedStyle(document.body).height - 56
+        timeline.updateDisplay()
+      })
     })
+  }
+
+  const open = () => {
+    load(list[0])
+  }
+
+  $('.dropdown-item').click(function () {
+    const hash = $(this).attr('href')
+    open(hash)
   })
 
+  open(location.hash)
 })
